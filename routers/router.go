@@ -17,5 +17,6 @@ func InitRouter() *gin.Engine {
 	r.Use(gin.Recovery())
 
 	r.POST("/login", api.Login)
+	r.GET("/ports", api.ListPorts)
 	return r
 }
