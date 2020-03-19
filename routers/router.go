@@ -18,5 +18,6 @@ func InitRouter() *gin.Engine {
 
 	r.POST("/login", api.Login)
 	r.GET("/ports", api.ListPorts)
+
 	return r
 }
