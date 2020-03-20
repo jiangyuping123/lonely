@@ -9,7 +9,8 @@ import (
 
 func InitRouter() *gin.Engine {
 
-	gin.SetMode(conf.RunMode)
+	appCfg := conf.GetAppCfg()
+	gin.SetMode(appCfg.RunMode)
 
 	r := gin.New()
 	r.Use(gin.Logger())

@@ -2,6 +2,7 @@ package main
 
 import (
 	"AdapterServer/conf"
+	"AdapterServer/db"
 	"AdapterServer/grpcservice"
 	"AdapterServer/routers"
 	"fmt"
@@ -10,13 +11,17 @@ import (
 
 func main() {
 
+	conf.LoadCfg()
+	db.InitDbConn()
+
+	httpServerCfg := conf.GetHttpServerCfg()
 	router := routers.InitRouter()
 
 	s := &http.Server{
-		Addr:           fmt.Sprintf(":%d", conf.HTTPPort),
+		Addr:           fmt.Sprintf(":%d", httpServerCfg.HTTPPort),
 		Handler:        router,
-		ReadTimeout:    conf.ReadTimeout,
-		WriteTimeout:   conf.WriteTimeout,
+		ReadTimeout:    httpServerCfg.ReadTimeout,
+		WriteTimeout:   httpServerCfg.WriteTimeout,
 		MaxHeaderBytes: 1 << 20,
 	}
 
